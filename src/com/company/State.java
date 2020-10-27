@@ -65,7 +65,7 @@ public class State implements Comparable<State> {
                 for (int personB : this.arA) {
                     if (personA < personB)
                     {
-                        ArrayList<Integer> couple = new ArrayList<>();
+                        ArrayList<Integer> couple = new ArrayList<>(); //ArrayList<Integer>() 
                         couple.add(personA);
                         couple.add(personB);
                         if(!couplesToPass.contains(couple))
@@ -77,7 +77,7 @@ public class State implements Comparable<State> {
 
             for(ArrayList<Integer> c:couplesToPass)
             {
-                State child=new State(arA,arB,elapsedTime,torchAtA);
+                State child=new State(arA,arB,elapsedTime,torchAtA); 
                 if(child.fromAtoB(c));
                 {
                     child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
@@ -88,7 +88,7 @@ public class State implements Comparable<State> {
             }
         }
         else //fanari sth b oxthi
-        {
+        { //edw mporeis na "klepseis" gt ka8e fora h kalyterh periptwsh einai na stelneis ton mikrotero, opws kai na to kaneis, gia na gyrnaei pio grhgora
             for(int person:this.arB)
             {
                 State child=new State(this.arA,this.arB,this.elapsedTime,this.torchAtA);
