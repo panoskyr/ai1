@@ -12,10 +12,9 @@ public class Main {
         A.add(2);
         A.add(5);
         A.add(10);
-
-        State initial=new State(A,B,0,true,10 );
+        State initial=new State(A,B,0,true);
         Solver solver=new Solver();
-        State terminal=solver.BFS(initial);
+        State terminal=solver.Astar(initial);
         if(terminal==null) System.out.println("apotyxia");
         else
         {

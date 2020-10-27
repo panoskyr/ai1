@@ -8,16 +8,15 @@ public class State implements Comparable<State> {
     private ArrayList<Integer> arA,arB;
     private boolean torchAtA;
     private int priority;
-    //private ArrayList<ArrayList<Integer>> couplesToPass;
 
     public State(){
         arA=new ArrayList<Integer>();
         arB=new ArrayList<>();
-        //couplesToPass=new ArrayList<ArrayList<Integer>>();
-        priority=0;
+        elapsedTime=0;
+        torchAtA=true;
     }
 
-    public State(ArrayList<Integer> A, ArrayList<Integer> B, int etime, boolean torchAtA, int priority)
+    public State(ArrayList<Integer> A, ArrayList<Integer> B, int etime, boolean torchAtA)
     {
         this.arA=new ArrayList<Integer>();
         arA.addAll(A);
@@ -25,9 +24,7 @@ public class State implements Comparable<State> {
         arB.addAll(B);
         this.elapsedTime=etime;
         this.torchAtA=torchAtA;
-        this.priority=priority;
-
-
+        this.priority=getDist();
     }
 
     /*paei 2 atoma apo thn a sth b oxthi
@@ -80,10 +77,10 @@ public class State implements Comparable<State> {
 
             for(ArrayList<Integer> c:couplesToPass)
             {
-                State child=new State(arA,arB,elapsedTime,torchAtA,priority );
+                State child=new State(arA,arB,elapsedTime,torchAtA);
                 if(child.fromAtoB(c));
                 {
-                    child.elapsedTime+=Math.max(c.get(0),c.get(1));
+                    child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
                     child.torchAtA=false;
                     child.priority=getDist();
                     children.add(child);
@@ -94,7 +91,7 @@ public class State implements Comparable<State> {
         {
             for(int person:this.arB)
             {
-                State child=new State(this.arA,this.arB,this.elapsedTime,this.torchAtA,this.priority );
+                State child=new State(this.arA,this.arB,this.elapsedTime,this.torchAtA);
 
                 if(child.fromBtoA(person))
                 {
@@ -123,12 +120,13 @@ public class State implements Comparable<State> {
         System.out.println("\nB:");
         for(int a:arB) System.out.print("\t "+a);
         System.out.println("\nelapsed time: " + this.elapsedTime) ;
+        System.out.println("\npriority: " + this.priority) ;
         System.out.println("----------------");
 
 
     }
     public int getMax(ArrayList<Integer> ar)
-    {
+    {   if(ar.isEmpty()) return 0;
         int max=-5;
         for(int i:ar)
             if(i>max) max=i;
@@ -141,7 +139,7 @@ public class State implements Comparable<State> {
     people could pass in a single wave what would the added cost be*/
     public int getDist()
     {
-        return this.getPriority()+getMax(this.arA);
+        return this.elapsedTime+getMax(this.arA);
 
     }
     @Override
