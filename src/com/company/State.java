@@ -82,7 +82,7 @@ public class State implements Comparable<State> {
                 {
                     child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
                     child.torchAtA=false;
-                    child.priority=getDist();
+                    child.priority=child.getDist();
                     children.add(child);
                 }
             }
@@ -97,7 +97,7 @@ public class State implements Comparable<State> {
                 {
                     child.elapsedTime+=person;
                     child.torchAtA=true;
-                    child.priority=getDist();
+                    child.priority=child.getDist();
                     children.add(child);
                 }
             }
