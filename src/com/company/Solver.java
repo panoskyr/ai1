@@ -41,7 +41,7 @@ public class Solver {
 
     public State Astar(State initialState)
     {
-        this.priority_states=new MinPQ<State>();
+        this.priority_states=new MinPQ<State>(); //xreiazomaste ton constuctor me to comparator. To priority twn states einai h synasthsh toy comparator
         if(initialState.isTerminal()) return initialState;
 
         //closedSet.add(initialState);
