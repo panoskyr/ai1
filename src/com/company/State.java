@@ -65,7 +65,7 @@ public class State implements Comparable<State> {
                 for (int personB : this.arA) {
                     if (personA < personB)
                     {
-                        ArrayList<Integer> couple = new ArrayList<>();
+                        ArrayList<Integer> couple = new ArrayList<Integer>();
                         couple.add(personA);
                         couple.add(personB);
                         if(!couplesToPass.contains(couple))

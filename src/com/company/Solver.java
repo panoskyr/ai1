@@ -44,7 +44,7 @@ public class Solver {
         this.priority_states=new MinPQ<State>();
         if(initialState.isTerminal()) return initialState;
 
-        closedSet.add(initialState);
+        //closedSet.add(initialState);
         initialState.print();
         priority_states.insert(initialState);
         while(!priority_states.isEmpty())
