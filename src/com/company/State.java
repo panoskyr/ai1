@@ -1,4 +1,3 @@
-package com.company;
 
 import java.util.ArrayList;
 
@@ -108,13 +107,7 @@ public class State implements Comparable<State> {
         return children;
 
     }
-    public State getFather() {
-		return father;
-	}
-    
-    public void setFather(State father) {
-		this.father = father;
-	}
+
 
     public boolean isTerminal()
     {
@@ -143,6 +136,18 @@ public class State implements Comparable<State> {
     }
     public int getPriority(){
         return this.priority;
+    }
+
+    public int getElapsed(){
+        return this.elapsedTime;
+    }
+
+    public State getFather(){
+        return this.father;
+    }
+
+    public void setFather(State f){
+        this.father=f;
     }
     /*relaxing that only 2 people can pass the bridge at any time we get the heuristic of distance meaning if all
     people could pass in a single wave what would the added cost be*/
