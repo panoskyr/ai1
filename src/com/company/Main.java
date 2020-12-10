@@ -22,6 +22,11 @@ public class Main {
             System.out.println("epityxia");
             System.out.println("Route to initial:");
             
+            while(terminal !=null) 
+            {
+                System.out.println(terminal);
+                terminal = termilal.getFather();
+            }
         }
     }
 }
