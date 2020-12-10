@@ -20,6 +20,8 @@ public class Main {
         else
         {
             System.out.println("epityxia");
+            System.out.println("Route to initial:");
+            
         }
     }
 }
