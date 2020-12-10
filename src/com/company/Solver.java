@@ -1,4 +1,4 @@
-package com.company;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +22,6 @@ public class Solver {
         {
             // step 3
             State currentState = this.states.remove(0);
-            currentState.print();
             // step 4
             if(currentState.isTerminal())
             {
@@ -44,13 +43,10 @@ public class Solver {
         this.priority_states=new MinPQ<State>(); //xreiazomaste ton constuctor me to comparator. To priority twn states einai h synasthsh toy comparator
         if(initialState.isTerminal()) return initialState;
 
-        //closedSet.add(initialState);
-        initialState.print();
         priority_states.insert(initialState);
         while(!priority_states.isEmpty())
         {
             State current=priority_states.delMin();
-            current.print();
             if(current.isTerminal()) return current;
             for(State s:current.getChildren())
             {
@@ -64,6 +60,5 @@ public class Solver {
 
 
 }
-
 
 
