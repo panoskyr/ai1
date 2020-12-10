@@ -24,7 +24,8 @@ public class Main {
             
             while(terminal !=null) 
             {
-                System.out.println(terminal);
+                terminal.print();
+                
                 terminal = termilal.getFather();
             }
         }
