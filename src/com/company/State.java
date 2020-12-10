@@ -8,6 +8,7 @@ public class State implements Comparable<State> {
     private ArrayList<Integer> arA,arB;
     private boolean torchAtA;
     private int priority;
+    private State father=null;
 
     public State(){
         arA=new ArrayList<Integer>();
@@ -83,6 +84,7 @@ public class State implements Comparable<State> {
                     child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
                     child.torchAtA=false;
                     child.priority=child.getDist();
+                    child.setFather(this);
                     children.add(child);
                 }
             }
@@ -98,6 +100,7 @@ public class State implements Comparable<State> {
                     child.elapsedTime+=person;
                     child.torchAtA=true;
                     child.priority=child.getDist();
+                    child.setFather(this);
                     children.add(child);
                 }
             }
@@ -105,7 +108,13 @@ public class State implements Comparable<State> {
         return children;
 
     }
-
+    public State getFather() {
+		return father;
+	}
+    
+    public void setFather(State father) {
+		this.father = father;
+	}
 
     public boolean isTerminal()
     {
