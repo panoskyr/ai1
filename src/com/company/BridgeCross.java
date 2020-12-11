@@ -13,13 +13,6 @@ public class BridgeCross {
         int Time= Integer.parseInt(args[n+1]);
         for (int i=1;i<=n; i++) A.add(Integer.parseInt(args[i]));
         Collections.sort(A);
-        /**
-        A.add(1);
-        A.add(2);
-        A.add(5);
-        A.add(10);
-        A.add(11);
-        int Time=40;*/
         State initial=new State(A,B,0,true);
         Solver solver=new Solver();
         State terminal=solver.Astar(initial);
@@ -27,13 +20,13 @@ public class BridgeCross {
         if(terminal==null) System.out.println("apotyxia");
         else
         {
-            if (terminal.getElapsed()> Time) {
+            if (terminal.getElapsedTime()> Time) {
                System.out.println("no solution found in given time by A*"); 
             } 
             else 
             {
-                System.out.println("Terminal State reached Using A*. Elapsed Time= " + terminal.getElapsed());
-                Astr=terminal.getElapsed();
+                System.out.println("Terminal State reached Using A*. Elapsed Time= " + terminal.getElapsedTime());
+                Astr=terminal.getElapsedTime();
                 System.out.println("Route to initial:");
             
                 while(terminal !=null) 
@@ -48,14 +41,14 @@ public class BridgeCross {
         if(terminal==null) System.out.println("apotyxia");
         else
         {
-            if (terminal.getElapsed()> Time) {
+            if (terminal.getElapsedTime()> Time) {
                System.out.println("no solution found in given time by bfs"); 
                System.exit(0);
             }
              else 
             {
-                System.out.println("Terminal State reached Using BFS. Elapsed Time= " + terminal.getElapsed());
-                if( Astr!=0 && terminal.getElapsed()< Astr){
+                System.out.println("Terminal State reached Using BFS. Elapsed Time= " + terminal.getElapsedTime());
+                if( Astr!=0 && terminal.getElapsedTime()< Astr){
             
                     
                     System.out.println("Route to initial:");

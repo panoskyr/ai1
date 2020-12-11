@@ -1,5 +1,7 @@
+package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class State implements Comparable<State> {
 
@@ -24,7 +26,7 @@ public class State implements Comparable<State> {
         arB.addAll(B);
         this.elapsedTime=etime;
         this.torchAtA=torchAtA;
-        this.priority=getDist();
+        this.priority=getPriority();
     }
 
     /*paei 2 atoma apo thn a sth b oxthi
@@ -54,7 +56,6 @@ public class State implements Comparable<State> {
     public ArrayList<State> getChildren()
     {
         ArrayList<State> children=new ArrayList<>();
-        //State child=new State(this.arA,this.arB,this.elapsedTime,this.torchAtA);
         //oloi oi tropoi p mporei na pane apo thn A sthn B einai apothikeymena sto onBridge
 
         if(torchAtA) {
@@ -82,7 +83,7 @@ public class State implements Comparable<State> {
                 {
                     child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
                     child.torchAtA=false;
-                    child.priority=child.getDist();
+                    child.priority=child.getPriority();
                     child.setFather(this);
                     children.add(child);
                 }
@@ -98,7 +99,7 @@ public class State implements Comparable<State> {
                 {
                     child.elapsedTime+=person;
                     child.torchAtA=true;
-                    child.priority=child.getDist();
+                    child.priority=child.getPriority();
                     child.setFather(this);
                     children.add(child);
                 }
@@ -122,11 +123,12 @@ public class State implements Comparable<State> {
         System.out.println("\nB:");
         for(int a:arB) System.out.print("\t "+a);
         System.out.println("\nelapsed time: " + this.elapsedTime) ;
-        System.out.println("\npriority: " + this.priority) ;
+        //System.out.println("\npriority: " + this.priority) ;
         System.out.println("----------------");
 
 
     }
+    //returns the max element of an arraylist used to calculate the heuristic of a pass
     public int getMax(ArrayList<Integer> ar)
     {   if(ar.isEmpty()) return 0;
         int max=-5;
@@ -134,11 +136,8 @@ public class State implements Comparable<State> {
             if(i>max) max=i;
             return max;
     }
-    public int getPriority(){
-        return this.priority;
-    }
 
-    public int getElapsed(){
+    public int getElapsedTime(){
         return this.elapsedTime;
     }
 
@@ -149,12 +148,19 @@ public class State implements Comparable<State> {
     public void setFather(State f){
         this.father=f;
     }
+
+    public int getPriority()
+    {
+        return getElapsedTime()+getHeuristic();
+
+    }
     /*relaxing that only 2 people can pass the bridge at any time we get the heuristic of distance meaning if all
     people could pass in a single wave what would the added cost be*/
-    public int getDist()
-    {
-        return this.elapsedTime+getMax(this.arA);
-
+    public int getHeuristic()
+    {   if(this.torchAtA)
+        return getMax(this.arA);
+        else
+            return this.arB.indexOf(Collections.min(arB))+getMax(this.arA);
     }
     @Override
     public int compareTo(State that)
