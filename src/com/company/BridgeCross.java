@@ -37,30 +37,6 @@ public class BridgeCross {
                 }
             }
         }
-        terminal=solver.BFS(initial);
-        if(terminal==null) System.out.println("apotyxia");
-        else
-        {
-            if (terminal.getElapsedTime()> Time) {
-               System.out.println("no solution found in given time by bfs"); 
-               System.exit(0);
-            }
-             else 
-            {
-                System.out.println("Terminal State reached Using BFS. Elapsed Time= " + terminal.getElapsedTime());
-                if( Astr!=0 && terminal.getElapsedTime()< Astr){
-            
-                    
-                    System.out.println("Route to initial:");
 
-                    /**while(terminal !=null) 
-                    {
-                        terminal.print();
-
-                        terminal = terminal.getFather();
-                    }*/
-                }
-            }   
         }
     }
-}
