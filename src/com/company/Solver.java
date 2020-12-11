@@ -13,30 +13,6 @@ public class Solver {
         this.closedSet = new HashSet<State>();
     }
 
-    //bfs with closedset just finds the solution does not return path to solution
-    public State BFS(State initialState)
-    {
-        if(initialState.isTerminal()) return initialState;
-        this.states.add(initialState);
-        while(states.size() > 0)
-        {
-            // step 3
-            State currentState = this.states.remove(0);
-            // step 4
-            if(currentState.isTerminal())
-            {
-                return currentState;
-            }
-            // step 5
-            if(!closedSet.contains(currentState))
-            {
-                closedSet.add(currentState);
-                // step 6
-                states.addAll(currentState.getChildren());
-            } // goto step 2
-        }
-        return null;
-    }
 
     public State Astar(State initialState)
     {
