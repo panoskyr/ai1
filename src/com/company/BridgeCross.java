@@ -16,7 +16,6 @@ public class BridgeCross {
         State initial=new State(A,B,0,true);
         Solver solver=new Solver();
         State terminal=solver.Astar(initial);
-        int Astr=0;
         if(terminal==null) System.out.println("apotyxia");
         else
         {
@@ -26,15 +25,9 @@ public class BridgeCross {
             else 
             {
                 System.out.println("Terminal State reached Using A*. Elapsed Time= " + terminal.getElapsedTime());
-                Astr=terminal.getElapsedTime();
                 System.out.println("Route to initial:");
-            
-                while(terminal !=null) 
-                {
-                    terminal.print();
-                
-                    terminal = terminal.getFather();
-                }
+                solver.findPath(terminal).forEach(State::print);
+
             }
         }
 

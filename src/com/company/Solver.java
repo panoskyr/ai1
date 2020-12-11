@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Solver {
     private ArrayList<State> states;
@@ -13,6 +15,16 @@ public class Solver {
         this.closedSet = new HashSet<State>();
     }
 
+    public List<State>  findPath(State solution)
+    {
+        LinkedList<State> ll=new LinkedList<State>();
+        while (solution!=null)
+        {
+            ll.addFirst(solution);
+            solution=solution.getFather();
+        }
+        return ll;
+    }
 
     public State Astar(State initialState)
     {
