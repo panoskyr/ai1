@@ -5,6 +5,7 @@ import java.util.*;
 public class BridgeCross {
 
     public static void main(String[] args) {
+        long startTime =System.currentTimeMillis();
         //checking values of parametres
         for( String s:args) { 
             if (Integer.parseInt(s)<= 0){
@@ -47,6 +48,9 @@ public class BridgeCross {
                 solver.findPath(terminal).forEach(State::print);
             }
         }
+        long endTime =System.currentTimeMillis();
+        System.out.println("Execution Time: " + (endTime-startTime));
     }
 }
+    
     
