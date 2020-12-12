@@ -7,12 +7,10 @@ import java.util.List;
 
 public class Solver {
     private ArrayList<State> states;
-    private HashSet<State> closedSet;
     private MinPQ<State> queue;
     public Solver()
     {
         this.states = new ArrayList<State>();
-        this.closedSet = new HashSet<State>();
     }
 
     public List<State>  findPath(State solution)
