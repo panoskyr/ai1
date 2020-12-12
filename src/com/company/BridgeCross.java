@@ -8,18 +8,18 @@ public class BridgeCross {
         //checking values of parametres
         for( String s:args) { 
             if (Integer.parseInt(s)<= 0){
-                System.println.out("Negative parameter given");
+                System.out.println("Negative parameter given");
                 System.exit(0);
             } 
         }        
         // 1st arg: people number. then idividual people crossing times. Lastly Time limit.
         
         int n= Integer.parseInt(args[0]); //number of family members
-        if (n!= args.lengh()+1) {
-            System.println.out("Wrong number of parameters given");
+        if (n!= args.length-2) {
+            System.out.println("Wrong number of parameters given");
             System.exit(0);
         }
-        int Time= Integer.parseInt(args.legth()-1); //time limit
+        int Time= Integer.parseInt(args[args.length-1]); //time limit
         //initializing lists
         ArrayList<Integer> A=new ArrayList<>();//list to save time of family members
         ArrayList<Integer> B=new ArrayList<>();//empty list to pass as value to initial State
