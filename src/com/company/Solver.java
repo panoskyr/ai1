@@ -6,11 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Solver {
-    private ArrayList<State> states;
     private MinPQ<State> queue;
     public Solver()
     {
-        this.states = new ArrayList<State>();
     }
 
     public List<State>  findPath(State solution)
