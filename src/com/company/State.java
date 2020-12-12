@@ -5,11 +5,11 @@ import java.util.Collections;
 
 public class State implements Comparable<State> {
 
-    private int elapsedTime;
-    private ArrayList<Integer> arA,arB;
-    private boolean torchAtA;
-    private int priority;
-    private State father=null;
+    private int elapsedTime; 
+    private ArrayList<Integer> arA,arB;// a is right, b is left
+    private boolean torchAtA; //true= lamb to the right,else lamb to the left
+    private int priority; //the state with the smallest priority gets examined 1st
+    private State father=null; //state from which this was created 
 
     public State(){
         arA=new ArrayList<Integer>();
@@ -29,39 +29,44 @@ public class State implements Comparable<State> {
         this.priority=getPriority();
     }
 
-    /*paei 2 atoma apo thn a sth b oxthi
-    oi 2 dynates metabaseis*/
+    /** Moves a couple from A to B
+        Also checks for mistakes 
+    */
     public boolean fromAtoB(ArrayList<Integer> persons)
     {
-          if(  this.arA.removeAll(persons))
-          {
-              this.arB.addAll(persons);
-              return true;
-          }
-          return false;
-
+        if(  this.arA.removeAll(persons))
+        {
+            this.arB.addAll(persons);
+            return true;
+        }
+        return false;
+        
     }
+    //transpots a person from b to a 
     public boolean fromBtoA(int person)
     {
         if(person>0)
         {
-        this.arA.add(person);
-        this.arB.remove((Object) person);
-        return true;
+            this.arA.add(person);
+            this.arB.remove((Object) person);
+            return true;
         }
-    return false;
+        return false;
     }
-    //thelo na ta paragei ola opvs to tiles allaze dejia aristera panv katv edv o xvros
-    //tvn lysevn einai ola ta dynata zeygaria p mporoyn na perasoyn apenanti.
+    
+    
     public ArrayList<State> getChildren()
     {
-        ArrayList<State> children=new ArrayList<>();
-        //oloi oi tropoi p mporei na pane apo thn A sthn B einai apothikeymena sto onBridge
-
+        ArrayList<State> children=new ArrayList<>();//list to return
+        
+        /**
+            *If lamb is at right, we need to produce every possibl couple
+            *Then we check if each couple can indeed pass the bridge, with fromAtoB
+         */
         if(torchAtA) {
 
             ArrayList<ArrayList<Integer>> couplesToPass=new ArrayList<ArrayList<Integer>>();
-            //to for paragei ta svsta pithana zeygaria gia na perasoun
+            //this double for loop produces possible couples 
             for (int personA : this.arA) {
                 for (int personB : this.arA) {
                     if (personA < personB)
@@ -79,7 +84,7 @@ public class State implements Comparable<State> {
             for(ArrayList<Integer> c:couplesToPass)
             {
                 State child=new State(arA,arB,elapsedTime,torchAtA);
-                if(child.fromAtoB(c));
+                if(child.fromAtoB(c)); //testing couples and creating kids
                 {
                     child.elapsedTime=child.elapsedTime+Math.max(c.get(0),c.get(1));
                     child.torchAtA=false;
@@ -89,7 +94,7 @@ public class State implements Comparable<State> {
                 }
             }
         }
-        else //fanari sth b oxthi
+        else //lamb in B, Left side
         {
             for(int person:this.arB)
             {
