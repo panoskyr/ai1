@@ -138,7 +138,7 @@ public class State implements Comparable<State> {
     {   if(ar.isEmpty()) return 0;
         int max=-5;
         for(int i:ar)
-            if(i>max) max=i;
+            if(i>=max) max=i;
             return max;
     }
 
@@ -165,7 +165,8 @@ public class State implements Comparable<State> {
     {   if(this.torchAtA)
         return getMax(this.arA);
         else
-            return this.arB.indexOf(Collections.min(arB))+getMax(this.arA);
+            return Collections.min(this.arB)+getMax(this.arA);
+
     }
     @Override
     public int compareTo(State that)
