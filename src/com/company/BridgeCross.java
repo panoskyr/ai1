@@ -49,7 +49,7 @@ public class BridgeCross {
             }
         }
         long endTime =System.currentTimeMillis();
-        System.out.println("Execution Time: " + (endTime-startTime));
+        System.out.println("Execution Time: " + (endTime-startTime) + "ms.");
     }
 }
     
