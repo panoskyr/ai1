@@ -29,7 +29,7 @@ public class BridgeCross {
 
         //initiallizing class objects
         State initial=new State(A,B,0,true);
-        Solver solver=new Solver();
+        Solver solver=new Solver(Time);
 
         //solution starts
         State terminal=solver.Astar(initial);
@@ -37,16 +37,10 @@ public class BridgeCross {
         //results
         if(terminal==null) System.out.println("No solution found");
         else
-        {
-            if (terminal.getElapsedTime()> Time) {
-               System.out.println("no solution found in given time"); 
-            } 
-            else 
-            {
-                System.out.println("Terminal State reached. Elapsed Time= " + terminal.getElapsedTime());
-                System.out.println("Route to initial:");
-                solver.findPath(terminal).forEach(State::print);
-            }
+        {    
+            System.out.println("Terminal State reached. Elapsed Time= " + terminal.getElapsedTime());
+            System.out.println("Route to initial:");
+            solver.findPath(terminal).forEach(State::print);
         }
         long endTime =System.currentTimeMillis();
         System.out.println("Execution Time: " + (endTime-startTime) + "ms.");
