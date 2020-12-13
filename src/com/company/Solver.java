@@ -7,9 +7,12 @@ import java.util.List;
 
 public class Solver {
     private MinPQ<State> queue;
+    private int time;
     
     //constuctor
-    public Solver(){}
+    public Solver(int time){
+        this.time=time;
+    }
 
     //method for finding the path from solution to initial state
     public List<State> findPath(State solution)
@@ -33,6 +36,10 @@ public class Solver {
         while(!queue.isEmpty())
         {
             State current= queue.delMin(); //examine State with least prioroty
+            if (current.getElapsedTime()> this.time) {
+               System.out.println("Time Limit Expired");
+               return null; 
+            } 
             if(current.isTerminal()) return current;
             for(State s:current.getChildren())
             {
